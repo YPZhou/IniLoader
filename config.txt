@@ -1,0 +1,4 @@
+test = 12
+;camera number
+;
+numCamera = 2

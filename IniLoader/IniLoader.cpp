@@ -78,6 +78,7 @@ void IniLoader::Parse()
 			if (str.at(i) == '\r' || str.at(i) == '\n')
 			{
 				ps = KEY;
+				m_list[key].push_back(listItem);
 				key = "";
 				listItem = "";
 			}
@@ -154,6 +155,12 @@ int IniLoader::GetInt(std::string key)
 float IniLoader::GetFloat(std::string key)
 {
 	return std::stof(m_dict[key]);
+}
+
+
+int IniLoader::GetListSize(std::string key)
+{
+	return m_list[key].size();
 }
 
 

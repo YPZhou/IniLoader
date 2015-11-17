@@ -25,6 +25,7 @@ public:
 	int GetInt(std::string key);
 	float GetFloat(std::string key);
 
+	int GetListSize(std::string key);
 	std::string GetListString(std::string key, int index);
 	int GetListInt(std::string key, int index);
 	float GetListFloat(std::string key, int index);

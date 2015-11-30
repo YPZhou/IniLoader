@@ -4,10 +4,13 @@
 #include <fstream>
 
 
-IniLoader::IniLoader(const char* filename)
+IniLoader::IniLoader(const char* filename, bool debug)
 {
 	std::ifstream ini(filename);
 	m_buffer << ini.rdbuf();
+
+	m_debug = debug;
+
 	Parse();
 }
 
@@ -120,22 +123,25 @@ void IniLoader::Parse()
 		}
 	}
 
-	std::unordered_map<std::string, std::string>::iterator it = m_dict.begin();
-	for (; it != m_dict.end(); it++)
+	if (m_debug)
 	{
-		std::cout << "Key " << (*it).first << " Value " << (*it).second << std::endl;
-	}
-
-	std::unordered_map<std::string, std::vector<std::string>>::iterator it_list = m_list.begin();
-	for (; it_list != m_list.end(); it_list++)
-	{
-		std::cout << "Key " << (*it_list).first << " : ";
-		std::vector<std::string>::iterator it_vec = it_list->second.begin();
-		for (; it_vec != it_list->second.end(); it_vec++)
+		std::unordered_map<std::string, std::string>::iterator it = m_dict.begin();
+		for (; it != m_dict.end(); it++)
 		{
-			std::cout << *it_vec << ' ';
+			std::cout << "Key " << (*it).first << " Value " << (*it).second << std::endl;
 		}
-		std::cout << std::endl;
+
+		std::unordered_map<std::string, std::vector<std::string>>::iterator it_list = m_list.begin();
+		for (; it_list != m_list.end(); it_list++)
+		{
+			std::cout << "Key " << (*it_list).first << " : ";
+			std::vector<std::string>::iterator it_vec = it_list->second.begin();
+			for (; it_vec != it_list->second.end(); it_vec++)
+			{
+				std::cout << *it_vec << ' ';
+			}
+			std::cout << std::endl;
+		}
 	}
 }
 

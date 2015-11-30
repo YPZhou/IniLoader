@@ -19,7 +19,7 @@ class __declspec(dllexport) IniLoader
 {
 
 public:
-	IniLoader(const char* filename);
+	IniLoader(const char* filename, bool debug = false);
 
 	std::string GetString(std::string key);
 	int GetInt(std::string key);
@@ -33,6 +33,7 @@ public:
 private:
 	void Parse();
 
+	bool m_debug;
 	std::stringstream m_buffer;
 	std::unordered_map<std::string, std::string> m_dict;
 	std::unordered_map<std::string, std::vector<std::string>> m_list;
